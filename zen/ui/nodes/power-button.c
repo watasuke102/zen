@@ -54,7 +54,7 @@ zn_power_button_render(struct zigzag_node *self, cairo_t *cr)
 {
   cairo_set_source_rgba(cr, 1.0, 1.0, 1.0, 0.7);
   zigzag_cairo_draw_rounded_rectangle(
-      cr, self->frame.width, self->frame.height, self->frame.height / 2);
+      cr, 0, 0, self->frame.width, self->frame.height, self->frame.height / 2);
   cairo_fill_preserve(cr);
   cairo_set_line_width(cr, 0.5);
   cairo_set_source_rgb(cr, 0.07, 0.12, 0.30);
