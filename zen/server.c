@@ -69,6 +69,7 @@ zn_server_handle_new_peer(struct wl_listener *listener, void *data)
 {
   struct zn_server *self = zn_container_of(listener, self, new_peer_listener);
   struct znr_remote_peer *peer = data;
+  zn_debug("New peer! ==> %s", peer->host);
 
   struct znr_session *session = znr_remote_create_session(self->remote, peer);
   if (session == NULL) return;

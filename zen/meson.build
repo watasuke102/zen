@@ -34,6 +34,7 @@ _zen_srcs = [
   'ui/zigzag-layout.c',
   'ui/nodes/menu-bar.c',
   'ui/nodes/power-button.c',
+  'ui/nodes/vr-modal/vr-modal.c',
 
   'wlr/box.c',
 ]
