@@ -37,6 +37,7 @@ _zen_srcs = [
   'ui/nodes/app-launcher.c',
   'ui/nodes/menu-bar.c',
   'ui/nodes/power-button.c',
+  'ui/nodes/test.c',
   'ui/nodes/power-menu/clock.c',
   'ui/nodes/power-menu/logout.c',
   'ui/nodes/power-menu/power-menu.c',

@@ -8,6 +8,8 @@
 #include "zen/screen.h"
 #include "zen/server.h"
 #include "zen/ui/nodes/menu-bar.h"
+#include "zen/ui/nodes/power-menu/clock.h"
+#include "zen/ui/nodes/test.h"
 #include "zen/ui/nodes/vr-modal/vr-modal.h"
 
 static void
@@ -37,7 +39,7 @@ zn_zigzag_layout_on_damage(struct zigzag_node *node)
 static const struct zigzag_layout_impl implementation = {
     .on_damage = zn_zigzag_layout_on_damage,
 };
-
+struct zn_test *t;
 struct zn_zigzag_layout *
 zn_zigzag_layout_create(struct zn_screen *screen, struct wlr_renderer *renderer)
 {
@@ -81,6 +83,20 @@ zn_zigzag_layout_create(struct zn_screen *screen, struct wlr_renderer *renderer)
   self->menu_bar = menu_bar;
 
   zigzag_layout_add_node(self->zigzag_layout, menu_bar->zigzag_node, renderer);
+
+  t = zn_test_create(zigzag_layout, renderer, 2, 0);
+  zigzag_layout_add_node(self->zigzag_layout, t->zigzag_node, renderer);
+
+  for (int i = 0; i < 5; ++i) {
+    struct zn_test *c =
+        zn_test_create(zigzag_layout, renderer, i % 2, 30 * (i + 1));
+    zigzag_node_add_child(t->zigzag_node, c->zigzag_node, renderer);
+  }
+  zn_debug("\n\n");
+  zigzag_node_reconfigure(
+      t->zigzag_node, ZIGZAG_RECONFIGURE_HORIZONTAL, ZIGZAG_RECONFIGURE_START);
+  zigzag_node_reconfigure(
+      t->zigzag_node, ZIGZAG_RECONFIGURE_VERTICAL, ZIGZAG_RECONFIGURE_START);
 
   struct zn_server *server = zn_server_get_singleton();
   self->display_system_changed_listener.notify =
