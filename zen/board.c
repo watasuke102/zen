@@ -47,8 +47,10 @@ zn_board_send_frame_done(struct zn_board *self, struct timespec *when)
 
   wl_list_for_each (view, &self->view_list, board_link) {
     wlr_surface_send_frame_done(view->surface, when);
-    view->impl->for_each_popup_surface(
-        view, zn_board_wlr_surface_send_frame_done_iterator, when);
+    if (view->impl->for_each_popup_surface) {
+      view->impl->for_each_popup_surface(
+          view, zn_board_wlr_surface_send_frame_done_iterator, when);
+    }
     // TODO: subsurfaces?
   }
 

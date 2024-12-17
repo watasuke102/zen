@@ -23,9 +23,9 @@ struct zn_view_interface {
   void (*restack)(
       struct zn_view *view, enum xcb_stack_mode_t mode);  // nullable
   uint32_t (*schedule_configure)(struct zn_view *view);   // nullable
-  void (*close_popups)(struct zn_view *view);
+  void (*close_popups)(struct zn_view *view);             // nullable
   void (*for_each_popup_surface)(struct zn_view *view,
-      wlr_surface_iterator_func_t iterator, void *user_data);
+      wlr_surface_iterator_func_t iterator, void *user_data);  // nullable
 };
 
 /** lifetime of given wlr_surface must be longer than zn_view */

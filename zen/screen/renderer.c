@@ -200,7 +200,9 @@ render_view(struct zn_output *output, struct zn_view *view,
       .renderer = renderer,
       .screen_damage = screen_damage,
   };
-  view->impl->for_each_popup_surface(view, popup_for_each_iterator, &data);
+  if (view->impl->for_each_popup_surface) {
+    view->impl->for_each_popup_surface(view, popup_for_each_iterator, &data);
+  }
 }
 
 static void
