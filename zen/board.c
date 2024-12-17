@@ -10,6 +10,7 @@
 #include "zen/screen-layout.h"
 #include "zen/screen.h"
 #include "zen/server.h"
+#include "zen/ui/layout-constants.h"
 #include "zen/view.h"
 
 #define BOARD_PIXEL_PER_METER 2800.f
@@ -100,6 +101,7 @@ zn_board_get_effective_size(
   if (server->display_system == ZN_DISPLAY_SYSTEM_SCREEN) {
     if (self->screen) {
       zn_screen_get_effective_size(self->screen, width, height);
+      *height -= menu_bar_height;
     } else {
       *width = 0;
       *height = 0;
